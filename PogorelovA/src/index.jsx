@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 class HelloMessage extends React.Component {
   constructor() {
@@ -31,7 +31,4 @@ class HelloMessage extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <HelloMessage name="Taylor" />,
-  document.getElementById("hello-example")
-);
+ReactDOM.render(<HelloMessage name="Taylor" />, document.getElementById('hello-example'));
