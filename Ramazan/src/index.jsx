@@ -1,38 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Massage from './components/Massage.jsx';
+// import message from './components/message.jsx';
 
 class HelloMessage extends React.Component {
   constructor() {
     super();
     this.state = {
       count: 0,
-      massage: [],
+      message: [],
     };
-    this.onClick = this.onClick.bind(this);
-    this.addMassage = this.addMassage.bind(this);
+    // this.onClick = this.onClick.bind(this);
+    this.addmessage = this.addmessage.bind(this);
   }
 
-  onClick() {
-    const { count } = this.state;
+  // onClick() {
+  //   const { count } = this.state;
+  //   this.setState({ count: count + 1 });
+  // }
+
+  addmessage() {
+    const { message, count } = this.state;
     this.setState({ count: count + 1 });
-  }
-
-  addMassage() {
-    const { massage, count } = this.state;
-    this.setState({ massage: [...massage, `сообщение: ${count}`] });
-    console.log(this.massage);
+    this.setState({ message: [...message, `сообщение: ${count + 1}`] });
+    console.log(this.state.message);
   }
   render() {
-    const { count, massage } = this.state;
+    const { count, message } = this.state;
 
     return (
       <div>
         <p>{count}</p>
-        <button onClick={this.onClick}>increment</button>
-        <button onClick={this.addMassage}>addMassage</button>
+        {/* <button>increment</button> */}
+        <button onClick={this.addmessage}>addmessage</button>
         <ul>
-          {massage.map((item, index) => {
+          {message.map((item, index) => {
             return <li key={index}>{item}</li>;
           })}
         </ul>
