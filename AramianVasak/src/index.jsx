@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import MessageField from './components/MessageField.jsx'
-import Message from './components/Message.jsx'
+import MessageField from './components/MessageField.jsx';
+import Message from './components/Message.jsx';
+import { v4 as uuidv4 } from 'uuid'
 
-// здесь надо пройтись по массиву с сообщениями
-// нужен хендлер, который принимает в себя 3 параметра (value as text, author через текст инпут, id при помощи uuidv4())
-// с ключами объекта из message, через props передаем его в MessageField, чтобы повесить на кнопку "Send"
 class App extends Component {
   state = {
-    messages: [{
-      id: 0,
-      author: 'User',
-      text: 'idk',
-    }],
+    messages: []
   };
 
   componentDidUpdate(prevState) {
-    const BotMessage = {
-      id: prevState.messages.length + 1,
-      author: 'Bot',
-      text: 'idk',
+    const { messages } = this.state;
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage.author !== "Bot") {
+      setTimeout(() => this.addMessage({ author: "Bot", message: "The student was a lazy dude" }), 500)
     }
+  }
 
-    if (this.state.messages.length % 2 !== 0) {
-      this.setState([...prevState.messages,])
-    }
+  addMessage = (message) => {
+    const { messages } = this.state;
+    this.setState({ messages: [...messages, { ...message, id: uuidv4() }] })
   }
 
   render() {
     const { messages } = this.state;
 
-    return (messages.map((item) => { <Message author={item.author} text={item.text} /> }))
+    return (
+      <div>
+        <ul>
+          {messages.map(({ id, author, message }) => (
+            <Message key={id} author={author} message={message} />
+          ))}
+        </ul>
+        <MessageField addMessage={this.addMessage} />
+      </div>
+    )
   }
 }
 
