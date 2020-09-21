@@ -4,9 +4,12 @@ import React, { Component } from 'react';
 // как записать в state?
 class MessageField extends Component {
     render() {
-        const { messages } = this.props;
 
-        return (messages.map((item) => <p>{item}</p>))
+        return (
+            <React.Fragment>
+                <input type="text" placeholder="Type your message" />
+                <button type="submit">Send</button>
+            </React.Fragment>)
     }
 }
 
