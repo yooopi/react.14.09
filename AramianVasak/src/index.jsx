@@ -1,46 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Messages from './components/Message.jsx'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import MessageField from './components/MessageField.jsx'
 
-class HelloMessage extends React.Component {
+// здесь надо пройтись по массиву с сообщениями
+// здесь должен быть хендлер, который принимает в себя 3 параметра
+// с ключами объекта из message, через props передаем его в MessageField
+class App extends Component {
   state = {
-    count: 0,
-    messages: [],
-    currentMessage: ''
-  };
-
-  onClick = () => {
-    const { count } = this.state;
-    this.setState({ count: count + 1 })
-  }
-
-  addMessage = () => {
-    this.setState({ messages: [...this.state.messages, this.state.currentMessage], currentMessage: '' })
+    messages: [{
+      id: uuidv4(),
+      author: 'idk',
+      text: 'idk',
+    }],
   }
 
   render() {
-    const { count } = this.state;
-    return (
-      <div>
-        <h1>Hello {this.props.name}</h1>
-        <Messages count={count} />
-        <button onClick={this.onClick}>increment</button>
-
-        <input type="text" value={this.state.currentMessage}
-          onChange={(e) => {
-            const { target: { value } } = e;
-            this.setState({ ...this.state, currentMessage: value })
-          }
-          } />
-        <input type="submit" onClick={this.addMessage} value='Add message' />
-
-        <div>{this.state.messages.join(', ')}</div>
-      </div>
-    );
+    return (<MessageField messages={this.state.messages} />)
   }
 }
 
-ReactDOM.render(
-  <HelloMessage name="Taylor" />,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'))

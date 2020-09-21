@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-const Messages = ({ count }) => {
-    return (
-        <div>
-            <h3>Привет, я функциональный компонент</h3>
-            <p>{count}</p>
-        </div>
-    )
+//компонент со строкой сообщения. Именно в него рендерится каждый объект из массива
+class Message extends Component {
+    render() {
+        return (<button>Add message</button>)
+    }
 }
 
-export default Messages
+export default Message
