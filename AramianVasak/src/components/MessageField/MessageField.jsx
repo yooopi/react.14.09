@@ -69,7 +69,12 @@ const MessageField = props => {
 
 MessageField.propTypes = {
   addMessage: PropTypes.func.isRequired,
-  classes: PropTypes.objectOf(PropTypes.any).isRequired,
+  classes: PropTypes.shape({
+    root: PropTypes.string,
+    item: PropTypes.string,
+    message: PropTypes.string,
+    submit: PropTypes.string,
+  }).isRequired,
 };
 
 export default withStyles(styles)(MessageField);

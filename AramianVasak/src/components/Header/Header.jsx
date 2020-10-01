@@ -1,12 +1,11 @@
-import { AppBar, CssBaseline, Toolbar, Typography } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import React from 'react';
 import cn from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { AppBar, CssBaseline, Toolbar, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 240;
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
@@ -14,10 +13,10 @@ const styles = theme => ({
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
   },
-});
+}));
 
-const Header = props => {
-  const { classes } = props;
+const Header = () => {
+  const classes = useStyles();
 
   return (
     <>
@@ -33,8 +32,4 @@ const Header = props => {
   );
 };
 
-Header.propTypes = {
-  classes: PropTypes.objectOf(PropTypes.any).isRequired,
-};
-
-export default withStyles(styles)(Header);
+export default Header;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 import { withStyles } from '@material-ui/core/styles';
 import { Container, List, ListItem } from '@material-ui/core';
-import cn from 'classnames';
-import MessageField from '../MessageField';
-import Message from '../Message';
 import Header from '../Header';
 import ChatList from '../ChatList/ChatList';
+import MessageField from '../MessageField';
+import Message from '../Message';
 
 const styles = theme => ({
   root: {
@@ -38,7 +38,7 @@ const styles = theme => ({
   },
 });
 
-const Layout = props => {
+const Layout = ({ classes }) => {
   const [messages, setMessages] = useState([]);
 
   const addMessage = message => {
@@ -52,8 +52,6 @@ const Layout = props => {
     }
   });
 
-  const { classes } = props;
-
   return (
     <div className={classes.root}>
       <Header />
@@ -63,8 +61,8 @@ const Layout = props => {
         <Container maxWidth={false} className={classes.container}>
           <List elevation={0} className={classes.chatContainer}>
             {messages.map(({ id, author, text }) => (
-              <ListItem className={cn(author === 'User' ? classes.fromUser : null)}>
-                <Message key={id} author={author} text={text} />
+              <ListItem key={id} className={cn(author === 'User' ? classes.fromUser : null)}>
+                <Message author={author} text={text} />
               </ListItem>
             ))}
           </List>

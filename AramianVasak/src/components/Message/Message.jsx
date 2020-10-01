@@ -23,7 +23,9 @@ const Message = ({ author, text, classes }) => {
 Message.propTypes = {
   author: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  classes: PropTypes.objectOf(PropTypes.any).isRequired,
+  classes: PropTypes.shape({
+    message: PropTypes.string,
+  }).isRequired,
 };
 
 export default withStyles(styles)(Message);
