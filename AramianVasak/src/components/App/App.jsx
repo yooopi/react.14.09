@@ -1,10 +1,10 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-import Layout from '../Layout';
+import RootRouter from '../../pages/RootRouter/RootRouter';
 
-// Так и не разобрался, как использовать темы.
-// В дочерних компонентах все равно другая палитра.
+// Увидел ошибку. Просто дочерний компнент не тот был.
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -24,10 +24,12 @@ const theme = createMuiTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Layout />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RootRouter />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

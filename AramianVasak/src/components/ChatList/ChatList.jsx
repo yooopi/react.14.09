@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Divider, Drawer, List } from '@material-ui/core';
+import { Divider, Drawer, List, ListItem, ListItemText } from '@material-ui/core';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AndroidIcon from '@material-ui/icons/Android';
 import cn from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import ListItems from './ListItems';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -19,8 +21,8 @@ const styles = theme => ({
   },
 });
 
-const ChatList = props => {
-  const { classes } = props;
+const ChatList = ({ chats, classes }) => {
+  console.log(Object.keys(chats));
 
   return (
     <Drawer
@@ -31,7 +33,20 @@ const ChatList = props => {
       open
     >
       <Divider />
-      <List>{ListItems}</List>
+      <List>
+        {Object.fromEntries(
+          Object.entries(chats).map((id, title) => (
+            <Link key={id} to={`/chat/${id}`}>
+              <ListItem button selected>
+                <ListItemIcon>
+                  <AndroidIcon />
+                </ListItemIcon>
+                <ListItemText primary={title} />
+              </ListItem>
+            </Link>
+          )),
+        )}
+      </List>
     </Drawer>
   );
 };
@@ -41,3 +56,14 @@ ChatList.propTypes = {
 };
 
 export default withStyles(styles)(ChatList);
+
+{
+  /* <Link key={id} to={`/chat/${id}`}>
+            <ListItem button selected>
+              <ListItemIcon>
+                <AndroidIcon />
+              </ListItemIcon>
+              <ListItemText primary="Chat" />
+            </ListItem>
+          </Link> */
+}

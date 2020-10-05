@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { triggerAsyncId } = require('async_hooks');
 
 module.exports = {
   entry: {
@@ -8,7 +9,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].[contenthash:6].js',
+    filename: '[name].[hash:6].js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -39,5 +41,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'build'),
     compress: true,
     port: 8080,
+    hot: true,
+    historyApiFallback: true,
   },
 };
